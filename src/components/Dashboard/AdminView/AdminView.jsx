@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { FaUser, FaVideo } from 'react-icons/fa';
+import { FaUser, FaVideo, FaToolbox, FaUsers } from 'react-icons/fa';
 import './AdminView.css';  // Asegúrate de que la ruta de importación sea la correcta
 import Videos from './Videos/Videos';
+import ManualvideoAccess from './ManualvideoAccess/ManualvideoAccess'; // Importa el componente ManualvideoAccess
+import UserManagement from './UserManagement/UserManagement'; 
 
 const AdminView = () => {
   const [currentView, setCurrentView] = useState(null);
@@ -40,6 +42,19 @@ const AdminView = () => {
             <Videos />
           </>
         );
+        case 'manualVideoAccess':
+        return (
+        <>
+        <ManualvideoAccess />
+        </>
+        );
+
+        case 'userManagement': // Caso para UserManagement
+        return(
+          <> 
+          <UserManagement />
+          </>
+        );
       default:
         return null;
     }
@@ -65,6 +80,20 @@ const AdminView = () => {
         >
           <FaVideo />
           <span className="sidebar-text">Videos</span>
+        </div>
+        <div
+          className="sidebar-icon"
+          onClick={() => setCurrentView('manualVideoAccess')}
+        >
+          <FaToolbox />
+          <span className="sidebar-text">Acceso Manual a Videos</span>
+        </div>
+        <div
+          className="sidebar-icon"
+          onClick={() => setCurrentView('userManagement')}
+        >
+          <FaUsers />
+          <span className="sidebar-text">Gestión de Usuarios</span>
         </div>
       </div>
       <div className={isExpanded ? 'content-area-expanded' : 'content-area'}>

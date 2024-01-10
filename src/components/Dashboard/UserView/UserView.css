@@ -107,6 +107,12 @@
   margin-bottom: 10px;
 }
 
+input:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+}
+
+
 input {
   display: block;
   width: 100%;

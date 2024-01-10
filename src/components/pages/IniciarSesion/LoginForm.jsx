@@ -11,8 +11,9 @@ function LoginForm() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  // Estado local para seguir el estado de la autenticación
+  // Estado local para seguir el estado de la autenticación y visibilidad de contraseña
   const [authFailed, setAuthFailed] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -40,18 +41,41 @@ function LoginForm() {
     }
   };
 
+  // Función para alternar la visibilidad de la contraseña
+  const togglePasswordVisibility = () => {
+    setShowPassword(showPassword);
+  };
+
+  // Función para resetear el mensaje de error cuando se editan los campos
+  const resetError = () => {
+    if (authFailed) {
+      setAuthFailed(false);
+    }
+  };
+
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
-          <input type="text" id="email" {...register('email', { required: true })} />
-          {errors.email && <span>El email es obligatorio</span>}
+          <input 
+            type="text" 
+            id="email" 
+            {...register('email', { required: true })}
+            onChange={resetError}
+          />
+          {errors.email && <span className="error-message">El email es obligatorio</span>}
         </div>
         <div className="form-group">
           <label htmlFor="password">Contraseña:</label>
-          <input type="password" id="password" {...register('password', { required: true })} />
-          {errors.password && <span>La contraseña es obligatoria</span>}
+          <input 
+            type={showPassword ? "text" : "password"} 
+            id="password" 
+            {...register('password', { required: true })}
+            onChange={resetError}
+            onClick={togglePasswordVisibility}  // Alternar visibilidad al hacer clic
+          />
+          {errors.password && <span className="error-message">La contraseña es obligatoria</span>}
         </div>
         {authFailed && <span className="error-message">No se pudo iniciar sesión. Por favor, inténtalo de nuevo.</span>}
         <button type="submit">Iniciar Sesión</button>

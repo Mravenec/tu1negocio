@@ -45,7 +45,7 @@ function SignupForm() {
                 {registerError && <div className="error">{registerError}</div>}
                 {registerSuccess && <div className="success">Registro exitoso</div>}
                 <div className="form-group">
-                    <label htmlFor="signup-username">Nombre de Usuario:</label>
+                    <label htmlFor="signup-username">Nombre Completo:</label>
                     <input type="text" id="signup-username" {...formRegister('username', { required: 'El nombre de usuario es obligatorio' })} />
                     {errors.username && <span>{errors.username.message}</span>}
                 </div>

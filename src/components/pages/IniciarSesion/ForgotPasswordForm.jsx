@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { forgotPassword } from '../../../store/actions/authActions';
 import './ForgotPasswordForm.css';
 
 function ForgotPasswordForm() {
     const [email, setEmail] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const forgotPasswordMessage = useSelector(state => state.auth.forgotPasswordMessage);
+    const forgotPasswordError = useSelector(state => state.auth.forgotPasswordError);
 
-    const handleSubmit = (event) => {
+    useEffect(() => {
+        // Comprobar si se ha enviado el formulario, hay un mensaje de éxito y no hay errores
+        if (isSubmitted && forgotPasswordMessage && !forgotPasswordError) {
+            setShowPopup(true);
+            setTimeout(() => {
+                setShowPopup(false);
+                navigate('/iniciar-sesion', { state: { message: "Revisa tu bandeja de entrada para las instrucciones de restablecimiento de contraseña." } });
+            }, 3000);
+        }
+    }, [forgotPasswordMessage, forgotPasswordError, isSubmitted, navigate]);
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // Aquí puedes agregar la lógica para procesar el formulario, como enviar el email
-        // para el reseteo de contraseña usando axios u otra biblioteca.
-
-        console.log('Solicitud de reseteo de contraseña enviada para:', email);
+        setIsSubmitted(true);
+        await dispatch(forgotPassword(email));
     };
 
     return (
@@ -28,7 +45,9 @@ function ForgotPasswordForm() {
                     />
                 </div>
                 <button type="submit">Enviar enlace de restablecimiento</button>
+                {forgotPasswordError && <div className="error-message">{forgotPasswordError}</div>}
             </form>
+            {showPopup && <div className="popup">Enlace de restablecimiento enviado, por favor revisa la bandeja de entrada de tu correo electrónico...</div>}
         </div>
     );
 }

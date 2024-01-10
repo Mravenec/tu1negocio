@@ -4,6 +4,7 @@ import { initializeAuth } from './store/actions/authActions';  // Importar initi
 import { useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import ResetPassword from './components/Dashboard/ResetPassword/ResetPassword';
 import {
   BrowserRouter as Router,
   Routes,
@@ -75,6 +76,7 @@ function AppWrapper() {
           <Route path="perfil" element={<h1>Perfil</h1>} /> {/* Ruta para la vista de perfil */}
           <Route path="videos" element={<h1>Videos</h1>} /> {/* Ruta para la vista de videos */}
         </Route>
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/payment" element={<PaymentView />} /> {/* Ruta agregada para PaymentView */}
       </Routes>
       <Footer />

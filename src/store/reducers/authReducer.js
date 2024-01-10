@@ -4,9 +4,19 @@
 const initialState = {
   isAuthenticated: false,
   user: null,
+
+  allUsers: [], // Estado para almacenar todos los usuarios
+  allUsersError: null, // Estado para almacenar errores relacionados con obtener todos los usuarios
+
+
   registerError: null,  // Para almacenar mensajes de error de registro
   loginError: null,  // Para almacenar mensajes de error de inicio de sesión
   registerSuccess: false,  // Para señalar si el registro fue exitoso
+  forgotPasswordMessage: null,
+  forgotPasswordError: null,
+  resetPasswordMessage: null,
+  resetPasswordError: null,
+
   videos: null, // Añadir un estado inicial para videos
   videosError: null, // Añadir un estado inicial para errores de videos
   paymentIntent: null,
@@ -69,19 +79,57 @@ const authReducer = (state = initialState, action) => {
         registerSuccess: true,  // Indicar que el registro fue exitoso
       };
 
-        case 'FIND_PAYMENT_INTENT_SUCCESS':
-          return {
-            ...state,
-            paymentIntent: action.payload,
-            paymentIntentError: null,
-          };
-        case 'FIND_PAYMENT_INTENT_ERROR':
-          return {
-            ...state,
-            paymentIntentError: action.payload,
-          };
+    case 'FORGOT_PASSWORD_SUCCESS':
+      return {
+        ...state,
+        forgotPasswordMessage: action.payload,
+        forgotPasswordError: null,
+      };
+    case 'FORGOT_PASSWORD_ERROR':
+      return {
+        ...state,
+        forgotPasswordError: action.payload,
+      };
+      case 'RESET_PASSWORD_SUCCESS':
+        return {
+          ...state,
+          resetPasswordMessage: action.payload, // Mensaje de éxito
+          resetPasswordError: null
+        };
+      
+      case 'RESET_PASSWORD_ERROR':
+        return {
+          ...state,
+          resetPasswordError: action.payload // Mensaje de error
+        };
 
- 
+        case 'FIND_ALL_USERS_BY_ADMIN_SUCCESS':
+      return {
+        ...state,
+        allUsers: action.payload,
+        allUsersError: null,
+      };
+    case 'FIND_ALL_USERS_BY_ADMIN_ERROR':
+      return {
+        ...state,
+        
+        allUsersError: action.payload,
+      };
+
+      
+    case 'FIND_PAYMENT_INTENT_SUCCESS':
+      return {
+        ...state,
+        paymentIntent: action.payload,
+        paymentIntentError: null,
+      };
+    case 'FIND_PAYMENT_INTENT_ERROR':
+      return {
+        ...state,
+        paymentIntentError: action.payload,
+      };
+
+
     case 'FETCH_VIDEOS_SUCCESS':
       return {
         ...state,
@@ -156,121 +204,121 @@ const authReducer = (state = initialState, action) => {
         videoTitleUpdateError: action.payload, // Agregar un estado para el error de actualización del título del video
       };
 
-      case 'DEACTIVATE_VIDEO_SUCCESS':
-        return {
-          ...state,
-          videos: state.videos.map((section) => {
-            return {
-              ...section,
-              videos: section.videos.map((video) => {
-                if (video.id === action.payload.videoId) {
-                  return {
-                    ...video,
-                    isActive: false, // Suponiendo que tienes un campo 'isActive' en tus objetos de video
-                  };
-                }
-                return video;
-              }),
-            };
-          }),
-        };
-  
-      case 'DEACTIVATE_VIDEO_ERROR':
-        return {
-          ...state,
-          deactivateVideoError: action.payload,
-        };
-  
-      case 'DEACTIVATE_SECTION_SUCCESS':
-        return {
-          ...state,
-          videos: state.videos.map((section) => {
-            if (section.id === action.payload.sectionId) {
-              return {
-                ...section,
-                isActive: false, // Suponiendo que tienes un campo 'isActive' en tus objetos de sección
-              };
-            }
-            return section;
-          }),
-        };
-  
-      case 'DEACTIVATE_SECTION_ERROR':
-        return {
-          ...state,
-          deactivateSectionError: action.payload,
-        };
-
-        case 'UPDATE_VIDEO_URL_SUCCESS':
-          // Agregar un nuevo caso para manejar la acción de actualización de URL del video
+    case 'DEACTIVATE_VIDEO_SUCCESS':
+      return {
+        ...state,
+        videos: state.videos.map((section) => {
           return {
-            ...state,
-            videos: state.videos.map((section) => {
-              return {
-                ...section,
-                videos: section.videos.map((video) => {
-                  if (video.id === action.payload.videoId) {
-                    return {
-                      ...video,
-                      url: action.payload.newUrl, // Actualizar la URL del video
-                    };
-                  }
-                  return video;
-                }),
-              };
+            ...section,
+            videos: section.videos.map((video) => {
+              if (video.id === action.payload.videoId) {
+                return {
+                  ...video,
+                  isActive: false, // Suponiendo que tienes un campo 'isActive' en tus objetos de video
+                };
+              }
+              return video;
             }),
           };
-    
-          case 'UPDATE_VIDEO_DESCRIPTION_SUCCESS':
-            return {
-              ...state,
-              videos: state.videos.map((section) => {
-                return {
-                  ...section,
-                  videos: section.videos.map((video) => {
-                    if (video.id === action.payload.videoId) {
-                      return {
-                        ...video,
-                        description: action.payload.newDescription,
-                      };
-                    }
-                    return video;
-                  }),
-                };
-              }),
-            };
-          case 'UPDATE_VIDEO_DESCRIPTION_ERROR':
-            return {
-              ...state,
-              videosError: action.payload,
-            };
-
-            case 'UNMARK_VIDEO_AS_WATCHED_SUCCESS':
-  return {
-    ...state,
-    videos: state.videos.map((section) => {
-      return {
-        ...section,
-        videos: section.videos.map((video) => {
-          if (video.id === action.payload.videoId) {
-            return {
-              ...video,
-              isWatched: false, // Cambiar el estado de visto a falso
-            };
-          }
-          return video;
         }),
       };
-    }),
-  };
 
-case 'UNMARK_VIDEO_AS_WATCHED_ERROR':
-  return {
-    ...state,
-    unmarkVideoAsWatchedError: action.payload,
-  };
+    case 'DEACTIVATE_VIDEO_ERROR':
+      return {
+        ...state,
+        deactivateVideoError: action.payload,
+      };
 
-  case 'FETCH_VIDEOS_BY_USER_SUCCESS':
+    case 'DEACTIVATE_SECTION_SUCCESS':
+      return {
+        ...state,
+        videos: state.videos.map((section) => {
+          if (section.id === action.payload.sectionId) {
+            return {
+              ...section,
+              isActive: false, // Suponiendo que tienes un campo 'isActive' en tus objetos de sección
+            };
+          }
+          return section;
+        }),
+      };
+
+    case 'DEACTIVATE_SECTION_ERROR':
+      return {
+        ...state,
+        deactivateSectionError: action.payload,
+      };
+
+    case 'UPDATE_VIDEO_URL_SUCCESS':
+      // Agregar un nuevo caso para manejar la acción de actualización de URL del video
+      return {
+        ...state,
+        videos: state.videos.map((section) => {
+          return {
+            ...section,
+            videos: section.videos.map((video) => {
+              if (video.id === action.payload.videoId) {
+                return {
+                  ...video,
+                  url: action.payload.newUrl, // Actualizar la URL del video
+                };
+              }
+              return video;
+            }),
+          };
+        }),
+      };
+
+    case 'UPDATE_VIDEO_DESCRIPTION_SUCCESS':
+      return {
+        ...state,
+        videos: state.videos.map((section) => {
+          return {
+            ...section,
+            videos: section.videos.map((video) => {
+              if (video.id === action.payload.videoId) {
+                return {
+                  ...video,
+                  description: action.payload.newDescription,
+                };
+              }
+              return video;
+            }),
+          };
+        }),
+      };
+    case 'UPDATE_VIDEO_DESCRIPTION_ERROR':
+      return {
+        ...state,
+        videosError: action.payload,
+      };
+
+    case 'UNMARK_VIDEO_AS_WATCHED_SUCCESS':
+      return {
+        ...state,
+        videos: state.videos.map((section) => {
+          return {
+            ...section,
+            videos: section.videos.map((video) => {
+              if (video.id === action.payload.videoId) {
+                return {
+                  ...video,
+                  isWatched: false, // Cambiar el estado de visto a falso
+                };
+              }
+              return video;
+            }),
+          };
+        }),
+      };
+
+    case 'UNMARK_VIDEO_AS_WATCHED_ERROR':
+      return {
+        ...state,
+        unmarkVideoAsWatchedError: action.payload,
+      };
+
+    case 'FETCH_VIDEOS_BY_USER_SUCCESS':
       return {
         ...state,
         videos: action.payload, // Actualiza el estado con los videos obtenidos
@@ -284,7 +332,7 @@ case 'UNMARK_VIDEO_AS_WATCHED_ERROR':
       };
 
 
-      // Caso para actualizar los teléfonos en el estado
+    // Caso para actualizar los teléfonos en el estado
     case 'UPDATE_PHONES_SUCCESS':
       return {
         ...state,

@@ -17,14 +17,14 @@ function BodyContactenos() {
                 ></iframe>
                 <p className="address">
                     Dirección: <br />
-                    Alajuela, 20101, Costa Rica
+                    Santa Bárbara, Heredia, 40401, Costa Rica
                 </p>
             </div>
             <div className="contact-details">
                 <h2>Póngase en contacto con nosotros</h2>
                 <p>Envíe un correo electrónico a <a href="mailto:info@roberto@tuprimernegocio.org">info@tuprimernegocio.org</a> para recibir más información general.</p>
                 <p>Encargado directo: <a href="mailto:roberto@tuprimernegocio.org">roberto@tuprimernegocio.org</a></p>
-                <p>Whatsapp: <a href="https://wa.me/50671902300">+(506) 7190 2300</a></p>
+                <p>Whatsapp: <a href="https://wa.me/50663244284">+(506) 6324 4284</a></p>
             </div>
         </div>
     );

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { 
-  findPaymentIntentByEmail, 
-  updateUserProfilePicture, 
-  updateAddress, 
-  updatePhones 
+import {
+  findPaymentIntentByEmail,
+  updateUserProfilePicture,
+  updateAddress,
+  updatePhones
 } from '../../../store/actions/authActions';
 import { FaUser, FaVideo, FaUpload } from 'react-icons/fa';
 import './UserView.css';
@@ -33,12 +33,36 @@ const UserView = () => {
       setHasVideoPermission(paymentIntent.permission);
     }
   }, [paymentIntent]);
+  /*
+    const handleVideoClick = () => {
+      if (hasVideoPermission) {
+        setCurrentView('videos'); // Muestra la vista de videos
+      } else {
+        setCurrentView('payment'); // Reemplaza '/path-to-payment-view' con la ruta correcta hacia la vista de pago
+      }
+    };
+  */
+  const handleVideoClick = async () => {
+    if (currentView === 'videos') {
+      return; // No cambies la vista si ya estás en 'videos'
+    }
 
-  const handleVideoClick = () => {
     if (hasVideoPermission) {
       setCurrentView('videos'); // Muestra la vista de videos
     } else {
-      setCurrentView('payment'); // Reemplaza '/path-to-payment-view' con la ruta correcta hacia la vista de pago
+      // No cambies la vista inmediatamente, solo si la validación es exitosa
+      try {
+        await dispatch(findPaymentIntentByEmail(userInfo.email));
+
+        if (paymentIntent && paymentIntent.permission) {
+          setCurrentView('videos'); // Cambia a la vista de videos si la validación es exitosa
+        } else {
+          setCurrentView('payment'); // Cambia a la vista de pago si no hay permiso
+        }
+      } catch (error) {
+        console.error('Error al obtener el permiso de pago:', error);
+        // Maneja el error aquí si es necesario
+      }
     }
   };
 
@@ -56,6 +80,9 @@ const UserView = () => {
     const onSubmitProfile = async (data) => {
       const formData = new FormData();
       if (data.profilePicture && data.profilePicture[0]) {
+        // Para propósitos de depuración, vamos a imprimir lo que se está enviando.
+    console.log('Archivo a enviar:', data.profilePicture[0]);
+    
         formData.append('profilePicture', data.profilePicture[0]);
       }
       formData.append('email', data.email);
@@ -99,15 +126,18 @@ const UserView = () => {
                   {...register('fullName')}
                   defaultValue={fullName}
                   placeholder="Nombre completo"
+                  disabled 
                 />
                 <input
                   name="email"
                   {...register('email')}
                   defaultValue={email}
                   placeholder="Correo electrónico"
+                  disabled  // Hace que el campo de correo electrónico sea de solo lectura
                 />
-                <button type="submit">Actualizar Perfil</button>
+                <button type="submit">Actualizar foto de perfil</button>
               </form>
+
 
               <form onSubmit={handleSubmit(onSubmitAddress)} className="form-address">
                 <h3>Dirección</h3>
@@ -185,7 +215,7 @@ const UserView = () => {
         </div>
       </div>
       <div className={isExpanded ? 'content-area-expanded' : 'content-area'}>
-          {renderContent}
+        {renderContent}
       </div>
     </div>
   );

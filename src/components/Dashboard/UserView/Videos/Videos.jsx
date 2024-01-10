@@ -15,13 +15,25 @@ const Videos = () => {
     dispatch(fetchVideosByUser());
   }, [dispatch]);
 
+  // Revisar el video seleccionado y los IDs de los videos
+  useEffect(() => {
+    console.log("Selected Video:", selectedVideo);
+    if (videosData) {
+      videosData.forEach(section => {
+        section.videos.forEach(video => {
+          console.log("Video in Data:", video);
+        });
+      });
+    }
+  }, [videosData, selectedVideo]);
+
   useEffect(() => {
     if (videosData && videosData.length > 0) {
       const newWatchedVideos = {};
       videosData.forEach(section => {
         if (section.videos) {
           section.videos.forEach(video => {
-            newWatchedVideos[video.video_id] = video.is_watched === 1;
+            newWatchedVideos[video.id] = video.is_watched === 1;
           });
         }
       });
@@ -36,37 +48,51 @@ const Videos = () => {
     }
   }, [videosData, selectedVideo]);
 
-  const toggleWatchedStatus = (videoId) => {
-    const isWatched = watchedVideos[videoId];
-    if (isWatched) {
-      dispatch(unmarkVideoAsWatched(videoId));
-    } else {
-      dispatch(markVideoAsWatched(videoId));
+  const markAsWatched = async (videoId) => {
+    try {
+      await dispatch(markVideoAsWatched(videoId));
+      setWatchedVideos((prevState) => ({ ...prevState, [videoId]: true }));
+      dispatch(fetchVideosByUser()); // Volver a cargar los datos actualizados
+      advanceToNextVideo();
+    } catch (error) {
+      console.error("Error al marcar el video como visto:", error);
     }
-    setWatchedVideos((prevState) => ({
-      ...prevState,
-      [videoId]: !isWatched,
-    }));
   };
+  
+  const unmarkAsWatched = async (videoId) => {
+    try {
+      await dispatch(unmarkVideoAsWatched(videoId));
+      setWatchedVideos((prevState) => ({ ...prevState, [videoId]: false }));
+      dispatch(fetchVideosByUser()); // Volver a cargar los datos actualizados
+    } catch (error) {
+      console.error("Error al desmarcar el video como visto:", error);
+    }
+  };
+  
 
-  const handleMarkAsWatchedAndNext = () => {
+
+  const advanceToNextVideo = () => {
     if (!selectedVideo || !videosData) return;
 
     const currentSectionIndex = videosData.findIndex((section) =>
-      section.videos && section.videos.some((video) => video.video_id === selectedVideo.video_id)
+      section.videos && section.videos.some((video) => video.id === selectedVideo.id)
     );
 
     if (currentSectionIndex === -1) return;
 
     const currentSection = videosData[currentSectionIndex];
-    const currentIndex = currentSection.videos.findIndex((video) => video.video_id === selectedVideo.video_id);
+    const currentIndex = currentSection.videos.findIndex((video) => video.id === selectedVideo.id);
 
-    let nextVideo;
+    let nextVideo = null;
+
+    // Buscar el siguiente video en la sección actual
     if (currentIndex < currentSection.videos.length - 1) {
       nextVideo = currentSection.videos[currentIndex + 1];
-    } else {
-      const nextSectionIndex = (currentSectionIndex + 1) % videosData.length;
-      for (let i = nextSectionIndex; i !== currentSectionIndex; i = (i + 1) % videosData.length) {
+    }
+
+    // Si no hay más videos en la sección actual, buscar en la siguiente sección
+    if (!nextVideo) {
+      for (let i = (currentSectionIndex + 1) % videosData.length; i !== currentSectionIndex; i = (i + 1) % videosData.length) {
         if (videosData[i].videos && videosData[i].videos.length > 0) {
           nextVideo = videosData[i].videos[0];
           break;
@@ -74,8 +100,8 @@ const Videos = () => {
       }
     }
 
+    // Si se encuentra un siguiente video, actualizar el video seleccionado
     if (nextVideo) {
-      toggleWatchedStatus(selectedVideo.video_id);
       setSelectedVideo(nextVideo);
       setAccordionState((prevState) => ({
         ...prevState,
@@ -83,6 +109,7 @@ const Videos = () => {
       }));
     }
   };
+
 
   const handleAccordionClick = (sectionId) => {
     setAccordionState((prevState) => ({
@@ -104,23 +131,24 @@ const Videos = () => {
               controls
               width="145vh"
               height="65vh"
-              onEnded={handleMarkAsWatchedAndNext}
+              onEnded={advanceToNextVideo}
             />
             <div className="video-content">
               <p>{selectedVideo.content}</p>
-              {!watchedVideos[selectedVideo.video_id] ? (
+              {!watchedVideos[selectedVideo.id] ? (
                 <div className="mark-as-watched">
-                  <button onClick={() => toggleWatchedStatus(selectedVideo.video_id)}>
+                  <button onClick={() => markAsWatched(selectedVideo.id)}>
                     Marcar como visto y continuar con el siguiente video
                   </button>
                 </div>
               ) : (
                 <div className="mark-as-watched">
-                  <button onClick={() => toggleWatchedStatus(selectedVideo.video_id)}>
+                  <button onClick={() => unmarkAsWatched(selectedVideo.id)}>
                     Desmarcar como visto y continuar con el siguiente video
                   </button>
                 </div>
               )}
+
             </div>
           </>
         ) : (
@@ -141,7 +169,7 @@ const Videos = () => {
               {accordionState[section.section_id] && section.videos && section.videos.length > 0 ? (
                 section.videos.map((video) => (
                   <div
-                    key={video.video_id}
+                    key={video.id}
                     onClick={() => setSelectedVideo(video)}
                     className="video-item"
                   >
@@ -149,7 +177,7 @@ const Videos = () => {
                     <div className="video-thumbnail" style={{ backgroundImage: `url(${video.url})` }}>
                     </div>
                     <span>{video.title}</span>
-                    {watchedVideos[video.video_id] && <div className="watched-check checked">✔</div>}
+                    {watchedVideos[video.id] && <div className="watched-check checked">✔</div>}
                   </div>
                 ))
               ) : (
