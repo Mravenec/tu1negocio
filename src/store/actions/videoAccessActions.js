@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://s1.tuprimernegocio.org/:8080';
+const BASE_URL = 'https://s1.tuprimernegocio.org:8080';
 
 
 // Función para obtener el token
