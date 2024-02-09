@@ -33,17 +33,18 @@ function BodyContactenos() {
 
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
             <HiOutlineMail size={50} style={{ marginRight: '10px' }}/> 
-                <p> Correo electrónico: <a href="mailto:info@roberto@tuprimernegocio.org">info@tuprimernegocio.org</a> para recibir más información general.</p>
+                <p> Correo electrónico: <a href="mailto:info@roberto@tuprimernegocio.org" aria-label="info@tuprimernegocio.org">info@tuprimernegocio.org</a> para recibir más información general.</p>
+                
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                 <FaUserTie size={40} style={{ marginRight: '10px' }}/>
-                <p>Encargado directo: <a href="mailto:roberto@tuprimernegocio.org">roberto@tuprimernegocio.org</a></p>
+                <p>Encargado directo: <a href="mailto:roberto@tuprimernegocio.org" aria-label="mailto:roberto@tuprimernegocio.org">roberto@tuprimernegocio.org</a></p>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                 <FaWhatsapp size={40} style={{ marginRight: '10px' }}/> 
-                <p>Whatsapp: <a href="https://wa.me/50663244284">+(506) 6324 4284</a></p>
+                <p>Whatsapp: <a href="https://wa.me/50663244284" aria-label="https://wa.me/50663244284">+(506) 6324 4284</a></p>
             </div>
             </div>
 
@@ -53,12 +54,13 @@ function BodyContactenos() {
 
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                 <GrInstagram size={40} style={{ marginRight: '10px', color: '#db34d3'}}/> 
-                <p><a href="https://www.instagram.com/tuprimernegociocr/">@tuprimernegociocr</a></p>
+                <a href="https://www.instagram.com/tuprimernegociocr/" aria-label="https://www.instagram.com/tuprimernegociocr/">@tuprimernegociocr</a>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                 <FaFacebook size={40} style={{ marginRight: '10px', color: 'blue'}}/> 
-                <p><a href=""></a></p>
+                <a href="https://www.fb.com" aria-label="https://www.fb.com">Facebook</a>
+
             </div>
               </div>
             </div>
