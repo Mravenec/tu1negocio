@@ -91,9 +91,13 @@ font-size: 12pt;
 
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .signup-form {
-        width: 90%;
- 
+        width: 100%;
+        margin: 60px auto;
+     
+    }
+    body{
+        padding: 20px;
     }
 }
