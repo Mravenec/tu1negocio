@@ -6,7 +6,7 @@ body {
   line-height: 1.5;
   color: #fff;
   text-align: left;
-  background-image: url('../build/pages/QuienesSomosPictures/abstract-black-background-minimal_706163-2766.jpg');
+  background-image: url('./abstract-black-background-minimal_706163-2766.jpg');
   background-size: cover; /* Ajustar la imagen al tamaño de la pantalla */
   background-position: center; /* Centrar la imagen */
   background-repeat: repeat-y; /* No repetir la imagen */
