@@ -55,6 +55,7 @@ function LoginForm() {
   };
 
   return (
+    <div className='body'>
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
       <h2>Iniciar Sesión</h2>
@@ -90,6 +91,7 @@ function LoginForm() {
       <div className="login-footer">
         <p>¿No tienes una cuenta? <Link to="/iniciar-sesion/registrarse">Registrate</Link></p>
       </div>
+    </div>
     </div>
   );
 }

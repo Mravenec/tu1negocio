@@ -3,6 +3,7 @@
 * {
     box-sizing: border-box;
     
+    
 }
 
 .signup-form {
@@ -94,10 +95,13 @@ font-size: 12pt;
 @media (max-width: 768px) {
     .signup-form {
         width: 100%;
-        margin: 60px auto;
+        margin: 40px auto;
+        padding: 15px;
      
     }
-    body{
-        padding: 20px;
-    }
+    .body{
+        padding: 20px; 
+       }
+    
+    
 }

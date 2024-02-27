@@ -38,7 +38,7 @@ function SignupForm() {
     };
 
     return (
-        <div>
+        <div className='body'>
            
             {/* Pop-up de éxito */}
             {showPopup && <div className="popup">Registro exitoso, redirigiendo...</div>}
