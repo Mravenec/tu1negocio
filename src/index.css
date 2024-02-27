@@ -4,11 +4,14 @@ body {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #fff;
   text-align: left;
-  background-color: #f8f9fa;
-}
+  background-image: url('../build/pages/QuienesSomosPictures/abstract-black-background-minimal_706163-2766.jpg');
+  background-size: cover; /* Ajustar la imagen al tamaño de la pantalla */
+  background-position: center; /* Centrar la imagen */
+  background-repeat: repeat-y; /* No repetir la imagen */
 
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -16,16 +19,8 @@ code {
 .container {
   max-width: 1200px;
   margin: 0 auto;
+
+  
 }
 
-a {
-  color: #007bff;
-  text-decoration: none;
-  background-color: transparent;
-}
-
-a:hover {
-  color: #0056b3;
-  text-decoration: underline;
-}
 
