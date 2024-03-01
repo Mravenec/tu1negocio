@@ -47,7 +47,7 @@ function BodyQuienesSomos() {
       <div className={`image-content`}>
         <img src={`./pages/QuienesSomosPictures/Fotot1n.jpeg`} alt="Quienes Somos" />
       </div>
-    </div>
+      </div>
   );
 }
 

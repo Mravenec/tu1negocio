@@ -10,6 +10,8 @@ body {
   background-size: cover; /* Ajustar la imagen al tamaño de la pantalla */
   background-position: center; /* Centrar la imagen */
   background-repeat: repeat-y; /* No repetir la imagen */
+  background-attachment: fixed; /* Fijar la imagen en la posición */
+
 
 }
 code {
@@ -22,5 +24,11 @@ code {
 
   
 }
+@media (max-width: 768px) {
 
+  body{
+      width: 100%;
+
+  }
+}
 

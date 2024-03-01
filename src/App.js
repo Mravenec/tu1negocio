@@ -25,8 +25,8 @@ import HeaderQuienesSomos from './components/pages/QuienesSomos/HeaderQuienesSom
 import BodyQuienesSomos from './components/pages/QuienesSomos/BodyQuienesSomos';
 
 // Anuncios
-import HeaderAnuncios from './components/pages/Anuncios/HeaderAnuncios';
-import BodyAnuncios from './components/pages/Anuncios/BodyAnuncios';
+//import HeaderComoIniciar from './components/pages/ComoIniciar/HeaderComoIniciar';
+import BodyComoIniciar from './components/pages/ComoIniciar/BodyComoIniciar';
 
 // Testimonios
 import BodyTestimonios from './components/pages/Testimonios/BodyTestimonios';
@@ -62,8 +62,9 @@ function AppWrapper() {
       <Routes>
         <Route path="/" element={<><HeaderHome /><BodyHome /></>} />
         <Route path="/quienes-somos" element={<><HeaderQuienesSomos /><BodyQuienesSomos /></>} />
-        <Route path="/anuncios" element={<><HeaderAnuncios /><BodyAnuncios /></>} />
         <Route path="/testimonios" element={<BodyTestimonios />}/>
+        <Route path="/como-iniciar" element={<><BodyComoIniciar /></>} />
+
         <Route path="/contactenos" element={<><HeaderContactenos /><BodyContactenos /></>} />
         <Route path="/iniciar-sesion/*" element={<><BodyIniciarSesion /></>}>
           <Route index element={<LoginForm />} />

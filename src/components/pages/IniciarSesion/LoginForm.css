@@ -5,6 +5,9 @@
     display: flex;
     justify-content: center; /* Centra horizontalmente */
     align-items: center; /* Centra verticalmente */
+    margin-bottom : 40px;
+    height: 80vh;
+
 }
 
 /* Estilos generales del contenedor */
@@ -14,7 +17,9 @@
     padding: 20px;
     border: 1px solid #8f3b1b;
     border-radius: 30px;
-    
+    background-color: #0000007c;
+
+
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -114,10 +119,12 @@ font-size: 12pt;
 @media (max-width: 768px) {
     .login-container {
         width: 100%;
-        margin: 60px auto;
+        margin: auto;
+        
         padding: 10px;
     }
    .body{
     padding: 10px;
+    height: 80vh;
    }
 }

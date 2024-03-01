@@ -240,10 +240,10 @@ display: none;
     overflow-y: auto;
   }
 
-  footer {
-    display: none;
-   
+ 
     
+  footer{
+    max-width: 100%;
   }
  
 }

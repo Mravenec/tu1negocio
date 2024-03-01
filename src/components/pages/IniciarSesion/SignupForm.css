@@ -6,16 +6,30 @@
     
 }
 
-.signup-form {
-    font-family: "Raleway", sans-serif;
+.bodySign{
     display: flex;
+    margin:  auto;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+
+    margin-bottom : 30px;
+    height: 95vh;
+   
+}
+.signup-form {
+    display: flex;
+    background-color: #0000007c;
+
+    font-family: "Raleway", sans-serif;
     flex-direction: column;
+    margin-top: 60px;
+
     width: 500px;
-    margin: 30px auto;
+    margin-bottom: 40px;
+
     border: 1px solid #e07a2f;
     border-radius: 30px;
    padding: 20px;
-margin-bottom: 70px;
 
 }
 
@@ -99,8 +113,9 @@ font-size: 12pt;
         padding: 15px;
      
     }
-    .body{
-        padding: 20px; 
+    .bodySign{
+        height: 100%;
+        padding: 20px;
        }
     
     
