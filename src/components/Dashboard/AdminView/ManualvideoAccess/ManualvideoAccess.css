@@ -12,6 +12,10 @@
   border-radius: 10px;
   overflow: hidden; /* Para bordes redondeados en la tabla */
 }
+.userTable{
+  width: 60%;
+  padding: 20px;
+}
 
 .user-table th,
 .user-table td {
@@ -36,13 +40,13 @@
 /* Estilos para los iconos */
 .icon {
   font-size: 1.5rem;
-  color: #007bff;
+  color: #ff7b00;
   cursor: pointer;
   margin: 0 10px;
 }
 
 .icon:hover {
-  color: #0056b3;
+  color: #cc8a28;
 }
 
 /* Estilos para los modales */

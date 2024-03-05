@@ -95,7 +95,7 @@ const ManualvideoAccess = () => {
   };
 
   return (
-    <div className="user-table">
+    <div className="user-table userTable">
       <form onSubmit={handleSubmit(onSubmit)}>
         <input {...register('email')} placeholder="Correo electrónico" />
         <button type="submit">{editAccessId ? 'Actualizar' : 'Agregar'}</button>

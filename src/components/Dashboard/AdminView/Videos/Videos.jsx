@@ -189,6 +189,8 @@ const Videos = () => {
   };
 
   return (
+    <div className="bodyVideos">
+
     <div className="videos-container">
       <div className="main-content">
         {selectedVideo ? (
@@ -223,7 +225,7 @@ const Videos = () => {
             <ReactPlayer
               url={selectedVideo.url}
               controls
-              width="145vh"
+              width="155vh"
               height="65vh"
               className= "react-player"
 
@@ -430,7 +432,7 @@ const Videos = () => {
 
       {isModalOpen && !sectionToAddVideo && (
         <div className="modal">
-          <div className="modal-content">
+          <div className="modal-content section">
             <form onSubmit={handleSubmit(onSectionSubmit)}>
               <input
                 type="text"
@@ -461,6 +463,7 @@ const Videos = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };

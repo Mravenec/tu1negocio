@@ -3,6 +3,7 @@
 .navbar {
   background-color: black;
   padding: 0.5rem 2rem;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   font-family: "Raleway", sans-serif;
@@ -11,11 +12,13 @@
   font-style: normal;
   align-items: center;
   position: relative; 
+
 }
 
 .navbar-logo {
   height: 50px; 
   margin-right: 1rem;
+  border-radius: 20px;
 }
 
 .navbar-title {
@@ -55,20 +58,28 @@
     flex-direction: column;
     position: absolute;
     right: 0;
+    gap: 0;
     top: 100%;
-    background-color: black;
-    width: 70%;
-    border-radius: 0 0 5px 5px;
+    background-color: rgb(32, 32, 32);
+
+    width: 60%;
+    border-radius: 0 0 0 10px ;
     z-index: 10;
+    
   }
 
   .navbar-list.active {
     display: flex;
+
+
+
   }
 
   .hamburger-menu {
     display: block;
     cursor: pointer;
+   
+
   }
 
   .bar {
@@ -76,5 +87,25 @@
     height: 3px;
     background-color: white;
     margin: 3px 0;
+  }
+  .navbar-list li  {
+padding: 10px;
+width: 100%;
+border-bottom: 1px solid #dddddd33;
+
+  }
+  
+  .navbar-list li a {
+    display: block;
+    border-radius: 0%;
+
+
+  }
+
+  .navbar-list li:hover {
+    color: #ddd;
+
+
+    background-color: #5c2705;
   }
 }

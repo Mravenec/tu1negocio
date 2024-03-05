@@ -2,7 +2,7 @@
   width: 60px;
   background-color: black;
   position: fixed;
-  height: 100vh;
+  height: 100%;
   top: 0;
   left: 0;
   transition: all 0.2s;
@@ -64,7 +64,9 @@ margin-top: 5%;
 .content-area-expanded {
   margin-left: 200px;
 }
-
+.useri{
+  margin-top: 63vh;
+}
 .user-info {
   padding: 20px;
   width: 80%;
@@ -149,3 +151,12 @@ button:hover {
 }
 
  
+@media (max-width: 768px) {  
+  .useri{
+  margin-top: 0;
+}
+.sidebar-text {
+  display: none;
+  flex-grow: 1;
+ }
+}

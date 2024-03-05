@@ -2,7 +2,7 @@
   width: 60px;
   background-color: black;
   position: fixed;
-  height: 100vh;
+  height: 100%;
   top: 0;
   left: 0;
   transition: all 0.2s;
@@ -49,10 +49,17 @@
   display: block;
  }
  
- .content-area,
+ .last{
+  margin-top: 48vh;
+}
+.content-area,
  .content-area-expanded {
   margin-left: 60px;
   padding: 20px;
+  display: flex;
+  margin-top: 5%;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 10%;
   transition: margin-left 0.3s;
   /* Agrega transición suave al cambiar el ancho de la barra lateral */
@@ -62,7 +69,8 @@
  
  .content-area-expanded {
   margin-left: 200px;
- }
+}
+ 
  
  @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;1,200&display=swap');
 
@@ -113,10 +121,19 @@
     top: 0%;
     justify-content: space-around;
   }
+  .sidebar .sidebar-text {
+    display: none;
+    flex-grow: 1;
+   }
  
   .sidebar:hover {
+    
     width: 100% !important;
-    height: 80px !important;
+    height: 60px !important;
+  }
+
+  .last{
+    margin-top: 0;
   }
 
   .content-area,

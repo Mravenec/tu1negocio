@@ -131,6 +131,8 @@ const Videos = () => {
 
 
   return (
+    <div className="bodyVideos">
+
 <div className="videos-container">
       <div className="main-content">
         {selectedVideo ? (
@@ -223,6 +225,7 @@ const Videos = () => {
         ) : (
           <p>No se ha agregado ninguna sección aún</p>
         )}
+      </div>
       </div>
     </div>
   );

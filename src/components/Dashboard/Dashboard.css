@@ -1,13 +1,12 @@
 .dashboard-container {
-
   width: 100%;
+  
 }
 
 .header {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-top: 500px;
   padding: 1px -5%; /* Puedes ajustar este valor para reducir aún más la altura */
   height: 40px; /* Establecer una altura específica */
   position: fixed; /* Agregar posición relativa para que z-index funcione */
@@ -24,8 +23,9 @@
 
 .h1-container {
   position: absolute;
-  top: -5%;  /* Mueve el elemento 10% hacia arriba respecto a su posición original */
-  left: 30%;
+  top: 0%;  /* Mueve el elemento 10% hacia arriba respecto a su posición original */
+  left: 35%;
+   bottom: 2%;
   margin: 10px;
 }
 
@@ -40,11 +40,11 @@
 }
 
 @media (max-width: 768px) {
-  .header {
-    margin-top: 85%;
-  }
 
- 
+  .sidebar-text {
+    display: none;
+    flex-grow: 1;
+   }
 
   .h1-container {
 display: none;

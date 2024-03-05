@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FaUser, FaVideo, FaToolbox, FaUsers } from 'react-icons/fa';
+import { FaUserGear } from "react-icons/fa6";
+import { IoIosArrowUp } from "react-icons/io";
+
 import './AdminView.css';  // Asegúrate de que la ruta de importación sea la correcta
 import Videos from './Videos/Videos';
 import ManualvideoAccess from './ManualvideoAccess/ManualvideoAccess'; // Importa el componente ManualvideoAccess
@@ -87,13 +90,23 @@ const AdminView = () => {
         >
           <FaToolbox />
           <span className="sidebar-text">Acceso Manual a Videos</span>
-        </div>
+        </div >
         <div
           className="sidebar-icon"
           onClick={() => setCurrentView('userManagement')}
         >
           <FaUsers />
           <span className="sidebar-text">Gestión de Usuarios</span>
+        </div>
+        
+        <div
+          className="sidebar-icon last"
+          onClick={() => setCurrentView('userManagement') }
+        
+        >
+          <FaUserGear />
+          <span className="sidebar-text">{user.fullName} <IoIosArrowUp size={10}/></span>
+
         </div>
       </div>
       <div className={isExpanded ? 'content-area-expanded' : 'content-area'}>

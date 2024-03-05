@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { FaUserGear } from "react-icons/fa6";
+
 import {
   findPaymentIntentByEmail,
   updateUserProfilePicture,
@@ -13,10 +15,13 @@ import Videos from './Videos/Videos';
 import PaymentView from './Payment/PaymentView'; // Importa PaymentView aquí
 
 const UserView = () => {
+  
   const [currentView, setCurrentView] = useState('profile');
   const [hasVideoPermission, setHasVideoPermission] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const userInfo = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
+
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
@@ -213,6 +218,14 @@ const UserView = () => {
           <FaVideo />
           <span className="sidebar-text">Videos</span>
         </div>
+        <div
+          className="sidebar-icon useri"
+          
+        >
+          <FaUserGear />
+          <span className="sidebar-text">{user.fullName}</span>
+        
+      </div>
       </div>
       <div className={isExpanded ? 'content-area-expanded' : 'content-area'}>
         {renderContent}
