@@ -12,16 +12,15 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Testimonios = () => {
   const videos = [
-   
     {
       url: "https://vimeo.com/920557391?share=copy",
-      text: "Steven Obregón: \n  \" Ha sido una experiencia muy enriquecedora, he aprendido muchísimo pero más que eso, he visto resultados monetarios y financieros. Hoy en dia cuento con más libertad y tiempo, estoy mas contento, tengo más paz y puedo ejecutar el negocio en momentos donde más me convienen. \"",
+      text: 'Steven Obregón: \n  " Ha sido una experiencia muy enriquecedora, he aprendido muchísimo pero más que eso, he visto resultados monetarios y financieros. Hoy en dia cuento con más libertad y tiempo, estoy mas contento, tengo más paz y puedo ejecutar el negocio en momentos donde más me convienen. "',
     },
-    
+
     {
-        url: "https://vimeo.com/918692270?share=copy",
-        text: "Mauricio Cruz: \n \" Es demasiado sencillo, demasiado fácil sólo es dejarse guiar por las recomendaciones y herramientas necesarias. \"",
-      }
+      url: "https://vimeo.com/918692270?share=copy",
+      text: 'Mauricio Cruz: \n " Es demasiado sencillo, demasiado fácil sólo es dejarse guiar por las recomendaciones y herramientas necesarias. "',
+    },
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -36,7 +35,7 @@ const Testimonios = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     prevArrow: <MdSkipPrevious color="white" size={30} />,
-    nextArrow: <MdSkipNext color="white" size={30}/>,
+    nextArrow: <MdSkipNext color="white" size={30} />,
     afterChange: (current) => setCurrentSlide(current),
   };
 
@@ -49,27 +48,24 @@ const Testimonios = () => {
         } else {
           playerRef.current.seekTo(0);
           playerRef.current.play();
-          
-          
         }
       }
     });
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlide]);
 
   return (
     <div className="testimonios-container">
-     
-
       <div className="video-container">
-      <div className="text" style={{textAlign:'center'}}>
-        <h1>Testimonios</h1>
-        <p className="sub">
-          Historias reales de personas iniciando en<strong> Tu Primer Negocio</strong>
-        </p>
-      </div>
-      <div className="separator"></div>
+        <div className="text" style={{ textAlign: "center" }}>
+          <h1>Testimonios</h1>
+          <p className="sub">
+            Historias reales de personas iniciando en
+            <strong> Tu Primer Negocio</strong>
+          </p>
+        </div>
+        <div className="separator"></div>
         <div className="mainVideo">
           <div className="videoPlayer">
             <Slider {...settings} ref={carouselRef}>
@@ -79,7 +75,7 @@ const Testimonios = () => {
                     ref={(ref) => (playerRefs.current[index] = ref)}
                     url={video.url}
                     controls={true} // Desactivar las barras de control
-               
+                    muted={true}
                     className="react-player"
                     playing={index === currentSlide}
                   />
