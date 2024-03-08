@@ -23,7 +23,7 @@
   color: #eeeeee;
   /* Color azul oscuro para el título de sección */
   font-size: 28px;
-  text-align: center;
+  text-align: start;
 
   /* Tamaño del texto grande para el título */
   margin-bottom: 20px;
@@ -45,7 +45,9 @@
   color: #d3792f;
   /* Utilizar el mismo color rojo para elementos destacados */
 }
-
+.steps-to-sucess-title{
+  justify-content: center;
+}
 .steps-to-success {
   margin-top: 30px;
   /* background: rgb(143, 59, 27, 0.8); */
@@ -101,6 +103,7 @@
 
 .body-anuncios .contact-info {
   background: rgba(248, 248, 248);
+  height: auto;
   /* Fondo ligeramente diferente para resaltar la sección */
   padding: 20px;
   width: 100%;
@@ -109,15 +112,12 @@
   /* Bordes redondeados */
   margin-top: 30px;
   /* Espacio antes de la sección de contacto */
-  display: flex;
-  justify-content: space-evenly;
+  
+
+
   align-items: center;
 }
 
-.contact-info {
-  margin-top: 30px;
-  margin: auto;
-}
 
 .body-anuncios .contact-info h3 {
   color: #000000;
@@ -128,11 +128,13 @@
 
 .contact-info p {
   color: #000000;
+  
 }
 
 .body-anuncios .contact-info p {
   margin-bottom: 10px;
   /* Espacio entre elementos de contacto */
+  
 }
 
 .body-anuncios a {
