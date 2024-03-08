@@ -1,3 +1,7 @@
+:root{
+  --primary-button-color: linear-gradient(to bottom, #8f3b1b 0%, #e07a2f 50%, #8f3b1b 100%);  
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -7,13 +11,18 @@ body {
   color: #fff;
   text-align: left;
   background-image: url('./abstract-black-background-minimal_706163-2766.jpg');
-  background-size: cover; /* Ajustar la imagen al tamaño de la pantalla */
-  background-position: center; /* Centrar la imagen */
-  background-repeat: repeat-y; /* No repetir la imagen */
-  background-attachment: fixed; /* Fijar la imagen en la posición */
+  background-size: cover;
+  /* Ajustar la imagen al tamaño de la pantalla */
+  background-position: center;
+  /* Centrar la imagen */
+  background-repeat: repeat-y;
+  /* No repetir la imagen */
+  background-attachment: fixed;
+  /* Fijar la imagen en la posición */
 
 
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -22,13 +31,13 @@ code {
   max-width: 1200px;
   margin: 0 auto;
 
-  
+
 }
+
 @media (max-width: 768px) {
 
-  body{
-      width: 100%;
+  body {
+    width: 100%;
 
   }
 }
-

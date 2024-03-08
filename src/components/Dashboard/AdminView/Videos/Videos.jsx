@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
-import { AiOutlinePlus, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'; // Importa los iconos
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { AiOutlinePlus, AiOutlineEdit, AiOutlineDelete } from "react-icons/ai"; // Importa los iconos
 import { RxPencil2 } from "react-icons/rx";
 import { GoTrash } from "react-icons/go";
 import { MdMovieEdit } from "react-icons/md";
 
-import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
+import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 
-import { RiPencilLine } from 'react-icons/ri'; // Importa el ícono de lápiz para editar URL
+import { RiPencilLine } from "react-icons/ri"; // Importa el ícono de lápiz para editar URL
 import {
   fetchVideos,
   createNewSection,
@@ -21,11 +21,11 @@ import {
   deactivateVideo,
   updateVideoUrl, // Importa la acción para actualizar la URL del video
   updateVideoDescription, // Importa la acción para actualizar la descripción del video
-} from '../../../../store/actions/authActions';
-import ReactPlayer from 'react-player';
-import 'react-tabs/style/react-tabs.css';
+} from "../../../../store/actions/authActions";
+import ReactPlayer from "react-player";
+import "react-tabs/style/react-tabs.css";
 
-import './Videos.css';
+import "./Videos.css";
 
 const Videos = () => {
   const dispatch = useDispatch();
@@ -38,13 +38,17 @@ const Videos = () => {
   const [editingTitleVideoId, setEditingTitleVideoId] = useState(null);
   const [editingSectionId, setEditingSectionId] = useState(null);
   const [isDescriptionModalOpen, setDescriptionModalOpen] = useState(false);
-  const [editedDescription, setEditedDescription] = useState('');
+  const [editedDescription, setEditedDescription] = useState("");
 
   const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
     dispatch(fetchVideos());
-    if (!selectedVideo && videosData?.length > 0 && videosData[0].videos?.length > 0) {
+    if (
+      !selectedVideo &&
+      videosData?.length > 0 &&
+      videosData[0].videos?.length > 0
+    ) {
       setSelectedVideo(videosData[0].videos[0]);
     }
   }, [dispatch, videosData, selectedVideo]);
@@ -92,7 +96,7 @@ const Videos = () => {
   };
 
   const handleSectionSequenceChange = (e, sectionId) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       const newSequence = parseInt(e.target.textContent);
       setAccordionState((prevState) => ({
@@ -108,7 +112,7 @@ const Videos = () => {
   };
 
   const handleVideoSequenceChange = (e, sectionId, videoId) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       const newSequence = parseInt(e.target.textContent);
       dispatch(updateVideoSequence(sectionId, videoId, newSequence));
@@ -145,7 +149,7 @@ const Videos = () => {
       }));
       stopEditingVideoTitle();
     } catch (error) {
-      console.error('Error al actualizar el título del video:', error);
+      console.error("Error al actualizar el título del video:", error);
     }
   };
 
@@ -154,26 +158,30 @@ const Videos = () => {
       await dispatch(updateSectionName(sectionId, newSectionName));
       stopEditingSectionName();
     } catch (error) {
-      console.error('Error al actualizar el nombre de la sección:', error);
+      console.error("Error al actualizar el nombre de la sección:", error);
     }
   };
 
   const handleDeleteSection = (sectionId) => {
-    const confirmDelete = window.confirm('¿Seguro que quieres desactivar esta sección y todos sus videos?');
+    const confirmDelete = window.confirm(
+      "¿Seguro que quieres desactivar esta sección y todos sus videos?"
+    );
     if (confirmDelete) {
       dispatch(deactivateSection(sectionId));
     }
   };
 
   const handleDeleteVideo = (videoId) => {
-    const confirmDelete = window.confirm('¿Seguro que quieres desactivar este video?');
+    const confirmDelete = window.confirm(
+      "¿Seguro que quieres desactivar este video?"
+    );
     if (confirmDelete) {
       dispatch(deactivateVideo(videoId));
     }
   };
 
   const handleEditVideoUrl = (videoId) => {
-    const newUrl = prompt('Ingresa la nueva URL del video:');
+    const newUrl = prompt("Ingresa la nueva URL del video:");
     if (newUrl !== null) {
       dispatch(updateVideoUrl(videoId, newUrl));
     }
@@ -181,289 +189,349 @@ const Videos = () => {
 
   const handleSaveDescription = async () => {
     try {
-      await dispatch(updateVideoDescription(selectedVideo.id, editedDescription));
+      await dispatch(
+        updateVideoDescription(selectedVideo.id, editedDescription)
+      );
       closeDescriptionModal();
     } catch (error) {
-      console.error('Error al actualizar la descripción del video:', error);
+      console.error("Error al actualizar la descripción del video:", error);
     }
   };
 
   return (
     <div className="bodyVideos">
-
-    <div className="videos-container">
-      <div className="main-content">
-        {selectedVideo ? (
-          <>
-            <div className="video-header">
-              <h3>
-                {editingTitleVideoId === selectedVideo.id ? (
-                  <input
-                    type="text"
-                    defaultValue={selectedVideo.title}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        handleVideoTitleChange(selectedVideo.id, e.target.value);
+      <div className="videos-container">
+        <div className="main-content">
+          {selectedVideo ? (
+            <>
+              <div className="video-header">
+                <h3>
+                  {editingTitleVideoId === selectedVideo.id ? (
+                    <input
+                      type="text"
+                      defaultValue={selectedVideo.title}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          handleVideoTitleChange(
+                            selectedVideo.id,
+                            e.target.value
+                          );
+                        }
+                      }}
+                      onBlur={(e) =>
+                        handleVideoTitleChange(selectedVideo.id, e.target.value)
                       }
-                    }}
-                    onBlur={(e) => handleVideoTitleChange(selectedVideo.id, e.target.value)}
-                  />
-                ) : (
-                  <>
-                    {selectedVideo.title}
-                    <span
-                      onClick={() => startEditingVideoTitle(selectedVideo.id)}
-                      className="edit-icon"
-                    >
-                      <AiOutlineEdit  />
-                    </span>
-                  </>
-                )}
-              </h3>
-            </div>
-            <ReactPlayer
-              url={selectedVideo.url}
-              controls
-              width="155vh"
-              height="65vh"
-              className= "react-player"
-
-              onEnded={() => markAsWatched(selectedVideo.id)}
-            />
-             <Tabs>
-             <TabList  >
-    <Tab >Descripción</Tab>
-    <Tab>Recursos</Tab>
-  </TabList>
-
-  <TabPanel>
-            <div className="video-content">
-             
-              <p>
-                {selectedVideo.content}
-                <span
-                  onClick={() => openDescriptionModal(selectedVideo.content)}
-                  className="edit-description-icon"
-                >
-                  <RiPencilLine  />
-                </span>
-              </p>
-            </div>
-            </TabPanel>
-            </Tabs>
-          </>
-        ) : (
-          <p>No hay un video seleccionado</p>
-        )}
-        
-      </div>
-      <div className="SideBarVideos">
-        {videosData?.length > 0 ? (
-          videosData.map((section) => (
-            <div key={section.section_id}>
-              <button onClick={() => handleAccordionClick(section.section_id)}>
-                <div
-                  className="sequence-box"
-                  contentEditable={isSectionSequenceEditable(section.section_id)}
-                  onKeyDown={(e) => handleSectionSequenceChange(e, section.section_id)}
-                >
-                  {section.section_sequence_number}
-                </div>
-                {editingSectionId === section.section_id ? (
-                  <input
-                    type="text"
-                    defaultValue={section.section_name}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        handleSectionNameChange(section.section_id, e.target.value);
-                      }
-                    }}
-                    onBlur={(e) => handleSectionNameChange(section.section_id, e.target.value)}
-                  />
-                ) : (
-                  <>
-                    {section.section_name}
-                    <span
-                      onClick={() => startEditingSectionName(section.section_id)}
-                      className="edit-icon"
-                    >
-                      <RxPencil2 size={22} style={{ marginLeft: '10px', marginRight: '10px', padding:'2px', borderRadius:'5px',  color:'white' }}/>
-                    </span>
-                  </>
-                )}
-                <span
-                  onClick={() => handleDeleteSection(section.section_id)}
-                  className="delete-icon"
-                >
-                  <GoTrash size={22} style={{padding:'2px', borderRadius:'5px',  color:'white' }}/>
-                </span>
-              </button>
-              {accordionState[section.section_id] && (
-                <>
-                  {section.videos && section.videos.length > 0 ? (
-                    section.videos.map((video) => (
-                      <div
-                        key={video.id}
-                        onClick={() => setSelectedVideo(video)}
-                        className="video-item"
+                    />
+                  ) : (
+                    <>
+                      {selectedVideo.title}
+                      <span
+                        onClick={() => startEditingVideoTitle(selectedVideo.id)}
+                        className="edit-icon"
                       >
+                        <AiOutlineEdit />
+                      </span>
+                    </>
+                  )}
+                </h3>
+              </div>
+              <ReactPlayer
+                url={selectedVideo.url}
+                controls
+                width="155vh"
+                height="65vh"
+                className="react-player"
+               
+                onEnded={() => markAsWatched(selectedVideo.id)}
+                playing={true}
+                muted={false}
+              />
+              <Tabs>
+                <TabList>
+                  <Tab>Descripción</Tab>
+                  <Tab>Recursos</Tab>
+                </TabList>
+
+                <TabPanel>
+                  <div className="video-content">
+                    <p>
+                      {selectedVideo.content}
+                      <span
+                        onClick={() =>
+                          openDescriptionModal(selectedVideo.content)
+                        }
+                        className="edit-description-icon"
+                      >
+                        <RiPencilLine />
+                      </span>
+                    </p>
+                  </div>
+                </TabPanel>
+              </Tabs>
+            </>
+          ) : (
+            <p>No hay un video seleccionado</p>
+          )}
+        </div>
+        <div className="SideBarVideos">
+          {videosData?.length > 0 ? (
+            videosData.map((section) => (
+              <div key={section.section_id}>
+                <button
+                  onClick={() => handleAccordionClick(section.section_id)}
+                >
+                  <div
+                    className="sequence-box"
+                    contentEditable={isSectionSequenceEditable(
+                      section.section_id
+                    )}
+                    onKeyDown={(e) =>
+                      handleSectionSequenceChange(e, section.section_id)
+                    }
+                  >
+                    {section.section_sequence_number}
+                  </div>
+                  {editingSectionId === section.section_id ? (
+                    <input
+                      type="text"
+                      defaultValue={section.section_name}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          handleSectionNameChange(
+                            section.section_id,
+                            e.target.value
+                          );
+                        }
+                      }}
+                      onBlur={(e) =>
+                        handleSectionNameChange(
+                          section.section_id,
+                          e.target.value
+                        )
+                      }
+                    />
+                  ) : (
+                    <>
+                      {section.section_name}
+                      <span
+                        onClick={() =>
+                          startEditingSectionName(section.section_id)
+                        }
+                        className="edit-icon"
+                      >
+                        <RxPencil2
+                          size={22}
+                          style={{
+                            marginLeft: "10px",
+                            marginRight: "10px",
+                            padding: "2px",
+                            borderRadius: "5px",
+                            color: "white",
+                          }}
+                        />
+                      </span>
+                    </>
+                  )}
+                  <span
+                    onClick={() => handleDeleteSection(section.section_id)}
+                    className="delete-icon"
+                  >
+                    <GoTrash
+                      size={22}
+                      style={{
+                        padding: "2px",
+                        borderRadius: "5px",
+                        color: "white",
+                      }}
+                    />
+                  </span>
+                </button>
+                {accordionState[section.section_id] && (
+                  <>
+                    {section.videos && section.videos.length > 0 ? (
+                      section.videos.map((video) => (
                         <div
-                          className="sequence-box"
-                          contentEditable={isVideoSequenceEditable(section.section_id, video.id)}
-                          onKeyDown={(e) =>
-                            handleVideoSequenceChange(e, section.section_id, video.id)
-                          }
+                          key={video.id}
+                          onClick={() => setSelectedVideo(video)}
+                          className="video-item"
                         >
-                          {video.sequence_number}
-                        </div>
-                        <div
+                          <div
+                            className="sequence-box"
+                            contentEditable={isVideoSequenceEditable(
+                              section.section_id,
+                              video.id
+                            )}
+                            onKeyDown={(e) =>
+                              handleVideoSequenceChange(
+                                e,
+                                section.section_id,
+                                video.id
+                              )
+                            }
+                          >
+                            {video.sequence_number}
+                          </div>
+                          <div
                           // className="video-thumbnail"
                           // style={{ backgroundImage: `url(${video.url})` }}
-                        >
-                          <span
-                            onClick={() => handleEditVideoUrl(video.id)}
-                            className="edit-icon" // Agregar ícono de lápiz para editar URL
                           >
-                            <MdMovieEdit size={22} style={{ marginRight: '8px',  color:'white'}} />
-                          </span>
-                        </div>
-                        <span>
-                          {editingTitleVideoId === video.id ? (
-                            <input
-                              type="text"
-                              defaultValue={video.title}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                  e.preventDefault();
-                                  handleVideoTitleChange(video.id, e.target.value);
+                            <span
+                              onClick={() => handleEditVideoUrl(video.id)}
+                              className="edit-icon" // Agregar ícono de lápiz para editar URL
+                            >
+                              <MdMovieEdit
+                                size={22}
+                                style={{ marginRight: "8px", color: "white" }}
+                              />
+                            </span>
+                          </div>
+                          <span>
+                            {editingTitleVideoId === video.id ? (
+                              <input
+                                type="text"
+                                defaultValue={video.title}
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter") {
+                                    e.preventDefault();
+                                    handleVideoTitleChange(
+                                      video.id,
+                                      e.target.value
+                                    );
+                                  }
+                                }}
+                                onBlur={(e) =>
+                                  handleVideoTitleChange(
+                                    video.id,
+                                    e.target.value
+                                  )
                                 }
-                              }}
-                              onBlur={(e) => handleVideoTitleChange(video.id, e.target.value)}
-                            />
-                          ) : (
-                            <>
-                              {video.title}
-                              <span
-                                onClick={() => startEditingVideoTitle(video.id)}
-                                className="edit-icon"
-                              >
-                                <AiOutlineEdit />
-                              </span>
-                            </>
-                          )}
-                          <span
-                            onClick={() => handleDeleteVideo(video.id)}
-                            className="delete-icon"
-                          >
-                            <AiOutlineDelete />
+                              />
+                            ) : (
+                              <>
+                                {video.title}
+                                <span
+                                  onClick={() =>
+                                    startEditingVideoTitle(video.id)
+                                  }
+                                  className="edit-icon"
+                                >
+                                  <AiOutlineEdit />
+                                </span>
+                              </>
+                            )}
+                            <span
+                              onClick={() => handleDeleteVideo(video.id)}
+                              className="delete-icon"
+                            >
+                              <AiOutlineDelete />
+                            </span>
                           </span>
-                        </span>
-                        {watchedVideos[video.id] && <span>Visto</span>}
-                      </div>
-                    ))
-                  ) : (
-                    <p>Aún no hay videos disponibles en esta sección.</p>
-                  )}
-                  <button
-                    className="add-video-button"
-                    onClick={() => {
-                      setIsModalOpen(true);
-                      setSectionToAddVideo(section.section_id);
-                    }}
-                  >
-                    Añadir Video a {section.section_name}
-                  </button>
-                </>
-              )}
+                          {watchedVideos[video.id] && <span>Visto</span>}
+                        </div>
+                      ))
+                    ) : (
+                      <p>Aún no hay videos disponibles en esta sección.</p>
+                    )}
+                    <button
+                      className="add-video-button"
+                      onClick={() => {
+                        setIsModalOpen(true);
+                        setSectionToAddVideo(section.section_id);
+                      }}
+                    >
+                      Añadir Video a {section.section_name}
+                    </button>
+                  </>
+                )}
+              </div>
+            ))
+          ) : (
+            <p>No se ha agregado ninguna sección aún</p>
+          )}
+          <button
+            className="add-section-button"
+            onClick={() => {
+              setIsModalOpen(true);
+              setSectionToAddVideo(null);
+            }}
+          >
+            <AiOutlinePlus />
+          </button>
+        </div>
+
+        {isModalOpen && sectionToAddVideo && (
+          <div className="modal">
+            <div className="modal-content">
+              <form onSubmit={handleSubmit(onVideoSubmit)}>
+                <input
+                  type="text"
+                  placeholder="Título del video"
+                  {...register("title", { required: true })}
+                />
+                <input
+                  type="text"
+                  placeholder="URL del video"
+                  {...register("url", { required: true })}
+                />
+                <input
+                  type="text"
+                  placeholder="Contenido del video"
+                  {...register("content", { required: true })}
+                />
+                <input
+                  type="number"
+                  placeholder="Número de secuencia"
+                  {...register("sequenceNumber", { required: true })}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleSubmit(onVideoSubmit)();
+                    }
+                  }}
+                />
+                <button type="submit">Agregar Video</button>
+                <button onClick={closeModal}>Cerrar</button>
+              </form>
             </div>
-          ))
-        ) : (
-          <p>No se ha agregado ninguna sección aún</p>
+          </div>
         )}
-        <button
-          className="add-section-button"
-          onClick={() => {
-            setIsModalOpen(true);
-            setSectionToAddVideo(null);
-          }}
-        >
-          <AiOutlinePlus />
-        </button>
-      </div>
 
-      {isModalOpen && sectionToAddVideo && (
-        <div className="modal">
-          <div className="modal-content">
-            <form onSubmit={handleSubmit(onVideoSubmit)}>
-              <input
-                type="text"
-                placeholder="Título del video"
-                {...register('title', { required: true })}
-              />
-              <input
-                type="text"
-                placeholder="URL del video"
-                {...register('url', { required: true })}
-              />
-              <input
-                type="text"
-                placeholder="Contenido del video"
-                {...register('content', { required: true })}
-              />
-              <input
-                type="number"
-                placeholder="Número de secuencia"
-                {...register('sequenceNumber', { required: true })}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleSubmit(onVideoSubmit)();
-                  }
-                }}
-              />
-              <button type="submit">Agregar Video</button>
-              <button onClick={closeModal}>Cerrar</button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {isModalOpen && !sectionToAddVideo && (
-        <div className="modal">
-          <div className="modal-content section">
-            <form onSubmit={handleSubmit(onSectionSubmit)}>
-              <input
-                type="text"
-                placeholder="Nombre de nueva sección"
-                {...register('sectionName', { required: true })}
-              />
-              <button type="submit">Agregar sección</button>
-              <button onClick={closeModal}>Cerrar</button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {isDescriptionModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Editar Descripción</h2>
-            <textarea
-              value={editedDescription}
-              onChange={(e) => setEditedDescription(e.target.value)}
-              rows="5"
-              placeholder="Escribe la nueva descripción aquí"
-            />
-            <div className="modal-buttons">
-              <button onClick={closeDescriptionModal}>Cancelar</button>
-              <button onClick={handleSaveDescription}>Guardar</button>
+        {isModalOpen && !sectionToAddVideo && (
+          <div className="modal">
+            <div className="modal-content section">
+              <form onSubmit={handleSubmit(onSectionSubmit)}>
+                <input
+                  type="text"
+                  placeholder="Nombre de nueva sección"
+                  {...register("sectionName", { required: true })}
+                />
+                <button type="submit">Agregar sección</button>
+                <button onClick={closeModal}>Cerrar</button>
+              </form>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+
+        {isDescriptionModalOpen && (
+          <div className="modal">
+            <div className="modal-content">
+              <h2>Editar Descripción</h2>
+              <textarea
+                value={editedDescription}
+                onChange={(e) => setEditedDescription(e.target.value)}
+                rows="5"
+                placeholder="Escribe la nueva descripción aquí"
+              />
+              <div className="modal-buttons">
+                <button onClick={closeDescriptionModal}>Cancelar</button>
+                <button onClick={handleSaveDescription}>Guardar</button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

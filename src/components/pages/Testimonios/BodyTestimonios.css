@@ -1,0 +1,100 @@
+.testimonios-container {
+  
+  background: rgba(0, 0, 0, 0.89);
+  /* border: 1px solid rgb(90, 56, 32); */
+  /* Borde sutil */
+  border-radius: 30px;
+  /* Bordes redondeados para un aspecto moderno */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Sombra suave para dar profundidad */
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  width: 85%;
+  /* Ancho máximo para mantener la legibilidad */
+  margin: 40px auto;
+  /* Centrado con margen vertical */
+  text-align: left;
+  border: 1px solid #8f3c1b3f;
+
+  /* Alineación del texto a la izquierda para facilitar la lectura */
+  margin-bottom: 60px;
+  height: 100%;
+}
+
+.text{
+    padding-left: 30px;
+    padding-top: 20px;
+    text-align: center;
+    
+}
+.mainVideo {
+  display: flex;
+  justify-content: center;
+  /* Centra horizontalmente */
+  align-items: center;
+  /* Centra verticalmente */
+  margin-bottom: 40px;
+  height: 100%;
+}
+
+.videoPlayer {
+  width: 20%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+
+  background-color:  rgba(0, 0, 0, 0.89);
+  margin-right: 20%;
+  
+}
+strong {
+    color: #d3792f;
+    /* Utilizar el mismo color rojo para elementos destacados */
+  }
+
+.videoDescription {
+width: 40%;
+border: 2.5px solid rgb(90, 56, 32);
+border-radius: 30px;
+padding: 10px;
+background-color: rgba(90, 56, 32, 0.116); ;
+text-align: center;
+
+
+}
+.separator {
+    height: 1px;
+    width: 90%;
+
+    background-color: #ffffff7c;
+    margin: 0 auto;
+  }
+
+
+  @media (max-width: 768px) {
+    .mainVideo {
+        display: block;
+        padding: 20px;
+}
+
+.text{
+    padding: 20px;
+}
+.videoPlayer {
+width: 100%;
+margin-bottom: 50px;
+
+}
+
+.separator {
+    height: 1px;
+    width: 95%;
+
+    
+    margin: 0 auto;
+  }
+.videoDescription{
+    width: 100%;
+    
+
+    }
+  }

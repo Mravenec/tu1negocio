@@ -1,3 +1,4 @@
+
 .body-contactenos {
     padding: 30px; /* Espaciado más reducido */
     font-size: 16px; /* Tamaño de fuente más pequeño */
@@ -13,7 +14,10 @@
 
 .contact-info, .contact-details {
     width: calc(50% - 10px); /* Ajusta el ancho teniendo en cuenta el gap */
+    height: 260px;
     padding: 20px; /* Espaciado interno para cada sección */
+    margin-top: 5%;
+
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para las tarjetas */
     border-radius: 10px; /* Bordes redondeados */
     background-color: #ffffff; /* Fondo blanco para destacar sobre un posible fondo */
@@ -22,13 +26,14 @@
 
 .contact-info {
     text-align: left;
+
+flex-direction: column; /* Organiza los elementos de forma vertical */
 }
 
-.contact-details {
+.contact-details, .contact-info {
     text-align: left;
     display: flex;
     flex-direction: column; /* Organiza los elementos de forma vertical */
-    justify-content: space-between; /* Distribuye el espacio verticalmente */
 }
 
 .contact-info iframe {
@@ -64,11 +69,13 @@ h2{
 @media (max-width: 768px) {
     .body-contactenos {
         flex-direction: column; /* Los elementos se apilan verticalmente en pantallas pequeñas */
+        margin-bottom: 60px;
     }
 
     .contact-info, .contact-details {
         width: 100%; /* Cada sección ocupa el 100% del ancho */
         margin-bottom: 15px; /* Espacio debajo de cada sección */
+        height: 100%;
     }
     
     /* Se mantiene la altura del mapa en dispositivos móviles */
