@@ -2,8 +2,9 @@
     background-color: black; 
     color: white; 
     text-align: center;
-    padding: 10px 0;
+    padding: 5px 0;
     position: fixed;
+    font-size: 8pt;
     bottom: 0;
     width: 100%;
 }

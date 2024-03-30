@@ -1,14 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;1,200&display=swap');
+
 .sidebar {
   width: 60px;
   background-color: black;
   position: fixed;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
   height: 100%;
   top: 0;
+  border-right: 2px solid var(--principal-button-color);
   left: 0;
   transition: all 0.2s;
   z-index: 1;
  }
- 
+
  .sidebar:hover {
   width: 200px;
  }
@@ -40,18 +45,28 @@
   margin-right: 10px;
  }
  
- .sidebar-text {
+ .sidebar-text, .submenu {
   display: none;
   flex-grow: 1;
  }
- 
- .sidebar:hover .sidebar-text {
+
+
+ .submenu-item {
+  list-style: none;
+
+  padding: 10px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  flex-grow: 1;
+ }
+ .submenu-item:hover{
+  background: var(--primary-button-color);
+ }
+ .sidebar:hover .sidebar-text,.submenu {
   display: block;
  }
  
- .last{
-  margin-top: 48vh;
-}
+
 .content-area,
  .content-area-expanded {
   margin-left: 60px;
@@ -68,11 +83,12 @@
  }
  
  .content-area-expanded {
-  margin-left: 200px;
+  margin-left: 300px;
+}
+.last-profile{
+  display: none;
 }
  
- 
- @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;1,200&display=swap');
 
  .user-info {
   width: 80%;
@@ -115,34 +131,75 @@
   .sidebar {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    height: 60px;
+    width: 80%;
+    height: 55px;
     position: fixed;
     top: 0%;
+ 
     justify-content: space-around;
   }
-  .sidebar .sidebar-text {
-    display: none;
+.sidebar-text {
+    display: none !important;
     flex-grow: 1;
    }
- 
+   .icons{
+    display: block;
+   }
+
   .sidebar:hover {
     
-    width: 100% !important;
-    height: 60px !important;
-  }
-
-  .last{
-    margin-top: 0;
+    width: 80% !important;
   }
 
   .content-area,
   .content-area-expanded {
-    margin-top: 30%;
+    
 
     margin-left: 0px;
-    padding: 0%;
- 
+    padding: 0;
     width: 100% !important;
+  }
+
+
+.item{
+  display: block;
+  
+}
+
+  
+/* Estilos para los subítems del menú */
+.submenu {
+  list-style: none;
+  position: absolute;
+  top: 110%; /* Alinear el submenú debajo del elemento padre */
+  right: 0;
+  text-align:  start;
+  padding: 0;
+  margin: 0;
+  
+
+  background-color: var(--navbar-color);
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Estilos para los elementos del submenú */
+.submenu-item {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 0;
+  
+}
+
+/* Mostrar el submenú cuando el elemento principal del menú está activo */
+.sidebar-icon:hover .submenu {
+  display: block;
+}
+  .last{
+    border-top: 1px solid #dddddd33;
+  }
+
+  .last-profile{
+    display: flex;
   }
  }

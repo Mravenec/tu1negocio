@@ -146,6 +146,8 @@ const Videos = () => {
               width="155vh"
               height="65vh"
               className= "react-player"
+              playing={true}
+              muted= {false}
               onEnded={advanceToNextVideo}
             />
             <div className="watched">

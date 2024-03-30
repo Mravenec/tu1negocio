@@ -13,6 +13,7 @@
   }
 .bodyVideos{
   width: 100%;
+  margin-top: 20px;
 height: 100vh;
 
 
@@ -215,7 +216,10 @@ p{
     justify-content: center;
     
   }
-
+  .bodyVideos{
+    width: 100%;
+    margin-top: 65px;
+    }
   .main-content {
     width: 100%;
     
@@ -223,6 +227,8 @@ p{
   
   .react-player{
     width: 100% !important;
+    
+              height:35vh!important;;
     margin: 0%;
   
   }

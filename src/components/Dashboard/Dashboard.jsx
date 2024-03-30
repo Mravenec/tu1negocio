@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../store/actions/authActions";
+import { useSelector } from "react-redux";
 import UserView from "./UserView/UserView";
 import AdminView from "./AdminView/AdminView";
 import DesignerView from "./DesignerView/DesignerView";
@@ -9,11 +8,6 @@ import "./Dashboard.css";
 const Dashboard = () => {
   const [viewMode, setViewMode] = useState(""); // Inicializar con cadena vacía
   const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
-
-  const handleLogout = useCallback(() => {
-    dispatch(logout());
-  }, [dispatch]);
 
   useEffect(() => {
     if (user?.adminIsActive) setViewMode("admin");
@@ -43,8 +37,12 @@ const Dashboard = () => {
   }, [user, viewMode]);
 
   return (
-    <div className="dashboard-container">
+  
+    <div>
       <div className="header">
+      <div className="h1-container">
+        <h4>{user ? `Bienvenido, ${user.fullName}` : "Cargando..."}</h4>
+      </div>
         {user.adminIsActive && (
           <select
             onChange={(e) => setViewMode(e.target.value)}
@@ -58,15 +56,14 @@ const Dashboard = () => {
             <option value="designer">Diseñador</option>
             {user?.userIsActive && <option value="user">Usuario</option>}
           </select>
+
         )}
-        <button onClick={handleLogout} className="logout-button">
-          Logout
-        </button>
-      </div>
-      <div className="h1-container">
-        <h1>{user ? `Bienvenido, ${user.fullName}` : "Cargando..."}</h1>
-      </div>
+        </div>
+      <div className="dashboard-container">
       {renderView()}
+      </div>
+      
+
     </div>
   );
 };
