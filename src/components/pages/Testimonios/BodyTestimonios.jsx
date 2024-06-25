@@ -60,16 +60,15 @@ const Testimonios = () => {
 
   return (
     <div className="testimonios-container">
-     
-
       <div className="video-container">
-      <div className="text" style={{textAlign:'center'}}>
-        <h1>Testimonios</h1>
-        <p className="sub">
-          Historias reales de personas iniciando en<strong> Tu Primer Negocio</strong>
-        </p>
-      </div>
-      <div className="separator"></div>
+        <div className="text" style={{ textAlign: "center" }}>
+          <h1>Testimonios</h1>
+          <p className="sub">
+            Historias reales de personas iniciando en
+            <strong> Tu Primer Negocio</strong>
+          </p>
+        </div>
+        <div className="separator"></div>
         <div className="mainVideo">
           <div className="videoPlayer">
             <Slider {...settings} ref={carouselRef}>
@@ -79,7 +78,7 @@ const Testimonios = () => {
                     ref={(ref) => (playerRefs.current[index] = ref)}
                     url={video.url}
                     controls={true} // Desactivar las barras de control
-               
+                    muted={true}
                     className="react-player"
                     playing={index === currentSlide}
                   />
