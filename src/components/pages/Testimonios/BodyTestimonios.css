@@ -46,6 +46,13 @@
   margin-right: 20%;
   
 }
+.react-player{
+  padding: 0%;
+ margin-bottom: 3%;
+width: 100% !important; 
+
+
+}
 strong {
     color: #d3792f;
     /* Utilizar el mismo color rojo para elementos destacados */
@@ -84,7 +91,12 @@ width: 100%;
 margin-bottom: 50px;
 
 }
+.react-player{
+  width: 100% !important;
+  
+  margin: 0%;
 
+}
 .separator {
     height: 1px;
     width: 95%;
