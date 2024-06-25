@@ -145,7 +145,7 @@ const Videos = () => {
               controls
               width="155vh"
               height="65vh"
-              className= "react-player"
+              className= "react-playerV"
               playing={true}
               muted= {false}
               onEnded={advanceToNextVideo}
